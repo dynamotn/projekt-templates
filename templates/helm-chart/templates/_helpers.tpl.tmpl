@@ -1,0 +1,14 @@
+{{- define "<% .Name %>.name" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "<% .Name %>.fullname" -}}
+{{- printf "%s-%s" .Release.Name (include "<% .Name %>.name" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "<% .Name %>.labels" -}}
+app.kubernetes.io/name: {{ include "<% .Name %>.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end -}}

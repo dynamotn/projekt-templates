@@ -1,0 +1,16 @@
+vars:
+  - name: base
+    prompt: Base image
+    default: alpine:3.22
+  - name: workdir
+    default: /app
+  - name: user
+    prompt: User the container runs as
+    default: nobody
+  - name: entrypoint
+    default: /bin/sh
+  - name: cmd
+    prompt: Default argument to the entrypoint
+  - name: port
+    prompt: Port to expose (blank for none)
+    type: int

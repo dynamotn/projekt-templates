@@ -1,0 +1,10 @@
+vars:
+  - name: package
+    prompt: Rego package name
+    default: '{{ .Name | replace "-" "_" }}'
+    required: true
+  - name: summary
+    prompt: What does the policy decide, in one line
+after:
+  - '{{ if lookPath "opa" }}opa fmt -w policy{{ end }}'
+  - '{{ if lookPath "opa" }}opa test policy{{ end }}'

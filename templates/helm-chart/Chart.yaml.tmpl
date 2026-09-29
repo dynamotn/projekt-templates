@@ -1,0 +1,8 @@
+apiVersion: v2
+name: <% .Name %>
+description: <% .Values.summary | default "What the chart deploys, in one line" %>
+type: application
+version: 0.1.0
+appVersion: "<% .Values.tag | default "latest" %>"
+maintainers:
+  - name: <% .Values.author | default .User %>

@@ -1,0 +1,1 @@
+{{ if ne .Values.kind "bin" }}src/main.rs{{ end }}

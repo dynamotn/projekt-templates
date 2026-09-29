@@ -1,0 +1,19 @@
+use std::process::ExitCode;
+
+fn main() -> ExitCode {
+    let Some(value) = std::env::args().nth(1) else {
+        eprintln!("Usage: {{ .Name }} <value>");
+        return ExitCode::from(64);
+    };
+
+    match {{ .Name | replace "-" "_" }}::run(&value) {
+        Ok(out) => {
+            println!("{out}");
+            ExitCode::SUCCESS
+        }
+        Err(err) => {
+            eprintln!("{{ .Name }}: {err}");
+            ExitCode::FAILURE
+        }
+    }
+}

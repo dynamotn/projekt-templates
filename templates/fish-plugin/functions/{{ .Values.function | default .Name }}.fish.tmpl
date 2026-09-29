@@ -1,0 +1,17 @@
+function {{ .Values.function | default .Name }} --description '{{ .Values.summary | default "What it does, in one line" }}'
+    argparse h/help -- $argv
+    or return 1
+
+    if set -q _flag_help
+        printf '%s\n' '{{ .Values.function | default .Name }} — {{ .Values.summary | default "what it does" }}'
+        printf '%s\n' 'Usage: {{ .Values.function | default .Name }} [-h] [argument]'
+        return 0
+    end
+{{ with .Values.requires }}
+    if not type -q {{ . }}
+        printf '%s\n' '{{ $.Values.function }}: {{ . }} is not installed' >&2
+        return 127
+    end
+{{ end }}
+    printf '%s\n' $argv
+end

@@ -1,0 +1,14 @@
+#include "{{ .Name }}/{{ .Name }}.hpp"
+
+#include <stdexcept>
+
+namespace {{ .Name | replace "-" "_" }} {
+
+std::string run(std::string_view value) {
+  if (value.empty()) {
+    throw std::invalid_argument("value must not be empty");
+  }
+  return std::string{value};
+}
+
+}  // namespace {{ .Name | replace "-" "_" }}

@@ -1,0 +1,45 @@
+// {{ .Name }} — {{ .Values.summary | default "what this pipeline builds" }}
+pipeline {
+    agent {
+        label '{{ .Values.agent | default "linux" }}'
+    }
+
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+    }
+
+    environment {
+        PROJECT = '{{ .Name }}'
+    }
+
+    stages {
+        stage('Lint') {
+            steps {
+                sh '{{ .Values.lint | default "make lint" }}'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh '{{ .Values.test | default "make test" }}'
+            }
+        }
+
+        stage('Build') {
+            when {
+                branch '{{ .Values.branch | default "main" }}'
+            }
+            steps {
+                sh '{{ .Values.build | default "make build" }}'
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}

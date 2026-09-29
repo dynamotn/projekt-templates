@@ -1,0 +1,13 @@
+vars:
+  - name: summary
+    prompt: What does the unit deploy, in one line
+  - name: module
+    prompt: Module source the unit calls
+    default: "../../modules/{{ .Name }}"
+    required: true
+  - name: environment
+    type: choice
+    choices: [dev, staging, prod]
+    default: dev
+after:
+  - '{{ if lookPath "terragrunt" }}terragrunt hclfmt{{ end }}'

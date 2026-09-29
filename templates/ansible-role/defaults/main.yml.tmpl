@@ -1,0 +1,4 @@
+---
+{{ .Name | replace "-" "_" }}_packages: []
+{{ .Name | replace "-" "_" }}_config_path: /etc/{{ .Name }}/config
+{{ .Name | replace "-" "_" }}_service: {{ .Name }}

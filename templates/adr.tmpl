@@ -1,0 +1,25 @@
+# {{ .Values.number | default "0001" }}. {{ .Values.title | default .Name }}
+
+- **Status**: {{ .Values.status | default "proposed" }}
+- **Date**: {{ .Date }}
+- **Deciders**: {{ .Values.deciders | default .User }}
+{{- with .Values.supersedes }}
+- **Supersedes**: {{ . }}
+{{- end }}
+
+## Context
+
+{{ .Values.context | default "What forces are at play, and what makes this a decision rather than a preference?" }}
+
+## Decision
+
+{{ .Values.decision | default "What we will do, in the active voice: \"We will ...\"" }}
+
+## Consequences
+{{ range .Values.consequences }}
+- {{ . }}
+{{- else }}
+- What becomes easier.
+- What becomes harder.
+- What we now have to watch.
+{{- end }}

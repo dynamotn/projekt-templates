@@ -1,0 +1,19 @@
+package {{ .Values.domain | default "io" }}.{{ .Values.org | default "github" }}.{{ .Values.owner | default .User }}.{{ .Name | replace "-" "" }};
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+class {{ .Values.className | default "App" }}Test {
+
+  @Test
+  void runReturnsItsArgument() {
+    assertEquals("value", {{ .Values.className | default "App" }}.run("value"));
+  }
+
+  @Test
+  void runRefusesAnEmptyValue() {
+    assertThrows(IllegalArgumentException.class, () -> {{ .Values.className | default "App" }}.run(""));
+  }
+}

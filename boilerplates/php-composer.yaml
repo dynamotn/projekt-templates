@@ -1,0 +1,10 @@
+description: PHP library with Composer and PHPUnit, in ~/Temp
+source:
+  template: php-composer
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [php, composer, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

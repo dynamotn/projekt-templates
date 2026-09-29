@@ -1,0 +1,23 @@
+# The parent every unit includes. Keep what is true for the whole stack here,
+# and nothing that is true for only one unit.
+
+remote_state {
+  backend = "{{ .Values.backend | default "local" }}"
+
+  generate = {
+    path      = "backend.tf"
+    if_exists = "overwrite_terragrunt"
+  }
+
+  config = {
+    path = "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/terraform.tfstate"
+  }
+}
+
+generate "provider" {
+  path      = "provider.tf"
+  if_exists = "overwrite_terragrunt"
+  contents  = <<EOT
+provider "null" {}
+EOT
+}

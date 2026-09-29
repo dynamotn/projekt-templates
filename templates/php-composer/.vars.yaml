@@ -1,0 +1,19 @@
+vars:
+  - name: vendor
+    prompt: Composer vendor name
+    default: "{{ .User }}"
+    required: true
+  - name: namespace
+    prompt: PHP namespace root
+    default: "{{ .User | title }}"
+    required: true
+  - name: className
+    prompt: Main class name
+    default: Runner
+  - name: phpVersion
+    prompt: Minimum PHP version
+    default: "8.4"
+  - name: summary
+    prompt: What does it do, in one line
+after:
+  - '{{ if lookPath "composer" }}composer install{{ end }}'

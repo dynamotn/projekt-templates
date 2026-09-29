@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+require "{{ .Name }}"
+
+RSpec.describe {{ .Values.module | default (.Name | title | replace "-" "") }} do
+  it "returns what it was given" do
+    expect(described_class.run("value")).to eq("value")
+  end
+
+  it "refuses an empty value" do
+    expect { described_class.run("") }.to raise_error({{ .Values.module | default (.Name | title | replace "-" "") }}::EmptyValueError)
+  end
+end

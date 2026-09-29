@@ -1,0 +1,12 @@
+vars:
+  - name: summary
+    prompt: What the filter does, in one line
+  - name: fs
+    prompt: Input field separator
+    default: "\t"
+  - name: ofs
+    prompt: Output field separator
+    default: "\t"
+  - name: pattern
+    prompt: Pattern the main rule matches
+    default: NR > 1

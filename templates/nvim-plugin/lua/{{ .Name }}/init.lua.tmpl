@@ -1,0 +1,30 @@
+---@brief {{ .Values.summary | default "What this plugin does, in one line" }}
+
+local config = require('{{ .Name }}.config')
+
+local M = {}
+
+---@param opts? {{ .Name | replace "-" " " | title | replace " " "" }}Opts
+function M.setup(opts)
+  config.setup(opts)
+  if not config.options.enabled then return end
+
+  local function run(args) M.run(args.fargs) end
+
+  vim.api.nvim_create_user_command(
+    '{{ .Values.command | default (.Name | replace "-" " " | title | replace " " "") }}',
+    run,
+    { nargs = '*', desc = '{{ .Values.summary | default "Run the plugin" }}' }
+  )
+end
+
+---@param args string[]
+function M.run(args)
+  vim.notify(
+    table.concat(args, ' '),
+    vim.log.levels.INFO,
+    { title = '{{ .Name }}' }
+  )
+end
+
+return M

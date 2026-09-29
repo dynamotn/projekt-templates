@@ -1,0 +1,17 @@
+namespace {{ .Name | replace "-" "" }};
+
+/// <summary>{{ .Values.summary | default "What this does, in one line" }}</summary>
+public static class Runner
+{
+    /// <summary>Returns <paramref name="value"/> as this program sees it.</summary>
+    /// <exception cref="ArgumentException">The value was empty.</exception>
+    public static string Run(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException("value must not be empty", nameof(value));
+        }
+
+        return value;
+    }
+}

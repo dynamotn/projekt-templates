@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+require_relative "{{ .Name }}/version"
+
+# {{ .Values.summary | default "What this gem does, in one line" }}
+module {{ .Values.module | default (.Name | title | replace "-" "") }}
+  # Raised when there is nothing to work on.
+  class EmptyValueError < ArgumentError; end
+
+  # Returns +value+ as this gem sees it.
+  def self.run(value)
+    raise EmptyValueError, "value must not be empty" if value.nil? || value.empty?
+
+    value
+  end
+end

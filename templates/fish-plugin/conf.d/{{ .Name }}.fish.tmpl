@@ -1,0 +1,5 @@
+# Loaded on every shell start, so it stays to what has to happen early:
+# variables the functions read, and nothing that costs time.
+status is-interactive; or exit 0
+
+set -q {{ .Name | replace "-" "_" }}_enabled; or set -g {{ .Name | replace "-" "_" }}_enabled 1

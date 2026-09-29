@@ -1,0 +1,13 @@
+description: Rust crate in ~/Working/personal/tools, on GitLab under dynamo-tools
+source:
+  template: rust-crate
+register:
+  workspace: ~/Working/personal/tools
+  prefix: tool
+  tags: [rust, tool, personal]
+  remote:
+    host: gl
+    group: dynamo-tools
+    branch: main
+after:
+  - git add -A && git commit -q -m "Start {{ .Name }}"

@@ -1,0 +1,41 @@
+metadata description = '{{ .Values.summary | default "What this module deploys, in one line" }}'
+
+@description('Name every resource is derived from.')
+@minLength(3)
+@maxLength(24)
+param name string
+
+@description('Region the resources go in.')
+param location string = resourceGroup().location
+
+@description('Tags applied to every resource that takes them.')
+param tags object = {}
+
+@description('SKU of the storage account.')
+@allowed([
+  'Standard_LRS'
+  'Standard_GRS'
+  'Standard_ZRS'
+])
+param sku string = '{{ .Values.sku | default "Standard_LRS" }}'
+
+resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+  name: name
+  location: location
+  tags: union(tags, { module: '{{ .Name }}' })
+  sku: {
+    name: sku
+  }
+  kind: 'StorageV2'
+  properties: {
+    minimumTlsVersion: 'TLS1_2'
+    supportsHttpsTrafficOnly: true
+    allowBlobPublicAccess: false
+  }
+}
+
+@description('Resource id of the storage account.')
+output id string = storage.id
+
+@description('Name of the storage account.')
+output name string = storage.name

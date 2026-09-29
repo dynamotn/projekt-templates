@@ -1,0 +1,15 @@
+vars:
+  - name: title
+    prompt: Document title
+    default: '{{ .Name }}'
+    required: true
+  - name: documentclass
+    type: choice
+    choices: [article, report, book, beamer]
+    default: article
+  - name: language
+    type: choice
+    choices: [english, vietnamese]
+    default: english
+after:
+  - '{{ if lookPath "latexmk" }}latexmk -pdf -quiet{{ end }}'

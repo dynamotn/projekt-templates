@@ -1,0 +1,19 @@
+---@class {{ .Name | replace "-" " " | title | replace " " "" }}Opts
+---@field enabled? boolean Turn the plugin off without uninstalling it
+
+local M = {}
+
+---@type {{ .Name | replace "-" " " | title | replace " " "" }}Opts
+M.defaults = {
+  enabled = true,
+}
+
+---@type {{ .Name | replace "-" " " | title | replace " " "" }}Opts
+M.options = M.defaults
+
+---@param opts? {{ .Name | replace "-" " " | title | replace " " "" }}Opts
+function M.setup(opts)
+  M.options = vim.tbl_deep_extend('force', {}, M.defaults, opts or {})
+end
+
+return M

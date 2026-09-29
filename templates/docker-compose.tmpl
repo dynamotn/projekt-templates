@@ -1,0 +1,18 @@
+services:
+  {{ .Values.service | default .Name }}:
+    image: {{ .Values.image | default "alpine:3.22" }}
+    container_name: {{ .Values.service | default .Name }}
+    restart: {{ .Values.restart | default "unless-stopped" }}
+{{- with .Values.port }}
+    ports:
+      - "{{ . }}:{{ . }}"
+{{- end }}
+    environment:
+      TZ: {{ .Values.timezone | default "Asia/Ho_Chi_Minh" }}
+    volumes:
+      - ./data:/data
+    healthcheck:
+      test: ["CMD-SHELL", {{ .Values.healthcheck | default "exit 0" | quote }}]
+      interval: 30s
+      timeout: 5s
+      retries: 3

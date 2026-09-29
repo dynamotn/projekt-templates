@@ -1,0 +1,15 @@
+---
+- name: Install the packages {{ .Name }} needs
+  ansible.builtin.package:
+    name: "{{ "{{ " }}{{ .Name | replace "-" "_" }}_packages{{ " }}" }}"
+    state: present
+  become: true
+  notify: Restart {{ .Name }}
+
+- name: Write the configuration
+  ansible.builtin.template:
+    src: config.j2
+    dest: "{{ "{{ " }}{{ .Name | replace "-" "_" }}_config_path{{ " }}" }}"
+    mode: "0644"
+  become: true
+  notify: Restart {{ .Name }}

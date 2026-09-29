@@ -1,0 +1,28 @@
+{
+  "name": "{{ with .Values.scope }}@{{ . }}/{{ end }}{{ .Name }}",
+  "version": "0.1.0",
+  "description": "{{ .Values.summary | default "What it does, in one line" }}",
+  "license": "{{ .Values.license | default "MIT" }}",
+  "author": "{{ .Values.author | default .User }}",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "lint": "biome check .",
+    "format": "biome format --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}

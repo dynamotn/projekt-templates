@@ -1,0 +1,10 @@
+vars:
+  - name: lint
+    prompt: Lint command
+    default: prek run --all-files
+  - name: test
+    prompt: Test command
+    default: echo 'no tests yet'
+  - name: buildDir
+    prompt: Directory `clean` removes
+    default: dist

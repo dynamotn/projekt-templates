@@ -1,0 +1,10 @@
+description: C++ project with CMake and CTest, in ~/Temp
+source:
+  template: cpp-cmake
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [cpp, cmake, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

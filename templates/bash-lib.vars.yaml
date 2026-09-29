@@ -1,0 +1,18 @@
+vars:
+  - name: area
+    prompt: Library area, the namespace of its functions
+    default: "{{ .Name }}"
+    required: true
+  - name: verb
+    prompt: First function's verb
+    default: run
+  - name: summary
+    prompt: What the library is for, in one line
+  - name: description
+    prompt: Why it exists
+  - name: verbSummary
+    prompt: What the first function does
+  - name: argSummary
+    prompt: What its argument is
+  - name: stdout
+    prompt: What it prints

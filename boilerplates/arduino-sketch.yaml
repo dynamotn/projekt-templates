@@ -1,0 +1,10 @@
+description: Arduino sketch with arduino-cli, in ~/Temp
+source:
+  template: arduino-sketch
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [arduino, embedded, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

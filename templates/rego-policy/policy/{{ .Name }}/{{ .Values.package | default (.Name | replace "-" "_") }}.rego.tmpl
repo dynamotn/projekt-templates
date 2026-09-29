@@ -1,0 +1,26 @@
+# METADATA
+# title: {{ .Values.package | default (.Name | replace "-" "_") }}
+# description: {{ .Values.summary | default "What this policy decides, in one line" }}
+package {{ .Values.package | default (.Name | replace "-" "_") }}
+
+import rego.v1
+
+default allow := false
+
+# A request is allowed when it names an owner and is not marked draft.
+allow if {
+	input.owner != ""
+	not input.draft
+}
+
+# Every reason the request was refused, so the caller sees all of them at once
+# rather than one per round trip.
+deny contains msg if {
+	input.owner == ""
+	msg := "owner must be set"
+}
+
+deny contains msg if {
+	input.draft
+	msg := "a draft cannot be applied"
+}

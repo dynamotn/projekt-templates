@@ -1,0 +1,9 @@
+# {{ .Name }}
+
+{{ .Values.summary | default "One line on what this contract does." }}
+
+```bash
+forge build
+forge test -vvv
+forge fmt --check
+```

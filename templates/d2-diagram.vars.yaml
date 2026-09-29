@@ -1,0 +1,23 @@
+vars:
+  - name: summary
+    prompt: What the diagram shows, in one line
+  - name: direction
+    type: choice
+    choices: [right, down, left, up]
+    default: right
+  - name: layout
+    type: choice
+    choices: [elk, dagre]
+    default: elk
+  - name: theme
+    prompt: d2 theme id
+    default: "300"
+  - name: actor
+    prompt: Who starts the flow
+    default: User
+  - name: service
+    prompt: Name of the service in the middle
+    default: '{{ .Name }}'
+  - name: store
+    prompt: Name of the store
+    default: Database

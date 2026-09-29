@@ -1,0 +1,28 @@
+description: Go CLI in ~/Working/personal/tools, on GitLab under dynamo-tools
+source:
+  template: go-cli
+vars:
+  - name: module
+    prompt: Go module path
+    default: 'gitlab.com/dynamo-tools/{{ .Name }}'
+    required: true
+  - name: summary
+    prompt: What does it do, in one line
+  - name: goVersion
+    prompt: Go version
+    default: "1.26"
+  - name: ci
+    prompt: Which CI to write
+    type: choice
+    choices: [gitlab, github, none]
+    default: gitlab
+register:
+  workspace: ~/Working/personal/tools
+  prefix: tool
+  tags: [go, tool, personal]
+  remote:
+    host: gl
+    group: dynamo-tools
+    branch: main
+after:
+  - git add -A && git commit -q -m "Start {{ .Name }}"

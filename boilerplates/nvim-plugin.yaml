@@ -1,0 +1,13 @@
+description: Neovim plugin in ~/Working/personal/misc, on GitHub under dynamotn
+source:
+  template: nvim-plugin
+register:
+  workspace: ~/Working/personal/misc
+  prefix: misc
+  tags: [neovim, lua, oss]
+  remote:
+    host: gh
+    group: dynamotn
+    branch: main
+after:
+  - git add -A && git commit -q -m "Start {{ .Name }}"

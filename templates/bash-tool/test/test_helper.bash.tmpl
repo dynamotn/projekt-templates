@@ -1,0 +1,23 @@
+PROJECT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." &> /dev/null && pwd)
+export PROJECT_DIR
+
+{{ if .Values.dybatpho -}}
+# shellcheck source=/dev/null
+source "${PROJECT_DIR}/lib/dybatpho/index.sh"
+{{- else -}}
+function dybatpho::expect_args {
+  local -a names=()
+  while [[ ${1} != "--" ]]; do
+    names+=("${1}")
+    shift
+  done
+  shift
+  [[ $# -ge ${#names[@]} ]] || return 1
+  local index=0
+  for name in "${names[@]}"; do
+    printf -v "${name}" '%s' "${1}"
+    shift
+    index=$((index + 1))
+  done
+}
+{{- end }}

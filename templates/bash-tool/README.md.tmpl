@@ -1,0 +1,18 @@
+# {{ .Name }}
+
+{{ .Values.summary | default "One line on what this is and who it is for." }}
+
+## Layout
+
+| Path       | What it holds                                  |
+|------------|------------------------------------------------|
+| `bin/`     | the executable                                 |
+| `lib/`     | bash libraries, sourced, namespaced `{{ .Values.area | default .Name }}::` |
+| `test/`    | bats tests, one file per library                |
+
+## Development
+
+```bash
+./test.sh                 # the bats suite
+prek run --all-files      # shellcheck, shfmt and the rest
+```

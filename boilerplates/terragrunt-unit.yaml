@@ -1,0 +1,10 @@
+description: Terragrunt unit in ~/Working/personal/infra, under dynamo-infra
+source:
+  template: terragrunt-unit
+register:
+  workspace: ~/Working/personal/infra
+  prefix: infra
+  tags: [terragrunt, infra]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

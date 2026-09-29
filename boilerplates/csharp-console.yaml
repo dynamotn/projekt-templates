@@ -1,0 +1,10 @@
+description: C# console app with xUnit, in ~/Temp
+source:
+  template: csharp-console
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [csharp, dotnet, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

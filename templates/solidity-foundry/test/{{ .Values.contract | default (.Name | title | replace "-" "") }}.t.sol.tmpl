@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: {{ .Values.license | default "MIT" }}
+pragma solidity ^{{ .Values.solcVersion | default "0.8.28" }};
+
+import {Test} from "forge-std/Test.sol";
+import {{ "{" }}{{ .Values.contract | default (.Name | title | replace "-" "") }}{{ "}" }} from "../src/{{ .Values.contract | default (.Name | title | replace "-" "") }}.sol";
+
+contract {{ .Values.contract | default (.Name | title | replace "-" "") }}Test is Test {
+    {{ .Values.contract | default (.Name | title | replace "-" "") }} internal subject;
+
+    function setUp() public {
+        subject = new {{ .Values.contract | default (.Name | title | replace "-" "") }}();
+    }
+
+    function test_OwnerCanSetValue() public {
+        subject.setValue(42);
+        assertEq(subject.value(), 42);
+    }
+
+    function test_RevertWhen_NotOwner() public {
+        vm.prank(address(0xBEEF));
+        vm.expectRevert({{ .Values.contract | default (.Name | title | replace "-" "") }}.NotOwner.selector);
+        subject.setValue(42);
+    }
+}

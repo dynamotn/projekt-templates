@@ -1,0 +1,15 @@
+vars:
+  - name: area
+    prompt: Library area, the namespace of its functions
+    default: "{{ .Name }}"
+    required: true
+  - name: summary
+    prompt: What does it do, in one line
+  - name: dybatpho
+    prompt: Vendor dybatpho as a submodule
+    type: bool
+    default: "yes"
+after:
+  - '{{ if lookPath "git" }}git init -q{{ end }}'
+  - '{{ if and .Values.dybatpho (lookPath "git") }}git submodule add -q https://github.com/dynamotn/dybatpho lib/dybatpho{{ end }}'
+  - '{{ if lookPath "prek" }}prek install{{ end }}'

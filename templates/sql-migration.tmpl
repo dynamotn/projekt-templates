@@ -1,0 +1,10 @@
+-- {{ .Values.number | default "0001" }}_{{ .Name }}.sql
+-- {{ .Values.summary | default "What this migration changes, in one line" }}
+-- Dialect: {{ .Values.dialect | default "ansi" }}
+-- Written: {{ .Date }}
+
+-- migrate:up
+{{ .Values.up | default (printf "CREATE TABLE %s (\n    id      BIGINT PRIMARY KEY,\n    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP\n);" (.Values.table | default .Name)) }}
+
+-- migrate:down
+{{ .Values.down | default (printf "DROP TABLE %s;" (.Values.table | default .Name)) }}

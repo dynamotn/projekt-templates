@@ -1,0 +1,18 @@
+package cli
+
+import (
+	"errors"
+	"testing"
+)
+
+func TestRunWithoutArgumentsIsUsage(t *testing.T) {
+	if err := Run(nil, "test"); !errors.Is(err, ErrUsage) {
+		t.Fatalf("want ErrUsage, got %v", err)
+	}
+}
+
+func TestRunEchoesItsArguments(t *testing.T) {
+	if err := Run([]string{"value"}, "test"); err != nil {
+		t.Fatalf("want no error, got %v", err)
+	}
+}

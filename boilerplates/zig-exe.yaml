@@ -1,0 +1,10 @@
+description: Zig executable with its own tests, in ~/Temp
+source:
+  template: zig-exe
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [zig, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ .Values.namespace | default (.User | title) }}\{{ .Name | title | replace "-" "" }}\Tests;
+
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
+use {{ .Values.namespace | default (.User | title) }}\{{ .Name | title | replace "-" "" }}\{{ .Values.className | default "Runner" }};
+
+final class {{ .Values.className | default "Runner" }}Test extends TestCase
+{
+    public function testRunReturnsItsArgument(): void
+    {
+        self::assertSame('value', (new {{ .Values.className | default "Runner" }}())->run('value'));
+    }
+
+    public function testRunRefusesAnEmptyValue(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        (new {{ .Values.className | default "Runner" }}())->run('');
+    }
+}

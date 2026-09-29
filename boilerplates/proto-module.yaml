@@ -1,0 +1,14 @@
+description: buf module in ~/Working/personal/misc, on GitHub under dynamotn
+source:
+  template: proto-module
+register:
+  workspace: ~/Working/personal/misc
+  prefix: misc
+  tags: [proto, grpc, oss]
+  remote:
+    host: gh
+    group: dynamotn
+    branch: main
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

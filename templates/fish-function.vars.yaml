@@ -1,0 +1,10 @@
+vars:
+  - name: function
+    prompt: Function name
+    default: "{{ .Name }}"
+    required: true
+  - name: summary
+    prompt: What it does, in one line
+  - name: requires
+    prompt: Command it needs on PATH
+    default: "true"

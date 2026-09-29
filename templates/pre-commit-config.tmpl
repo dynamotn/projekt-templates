@@ -1,0 +1,34 @@
+# Run with `prek run --all-files`.
+repos:
+{{ includeTemplate "precommit/base" . }}
+{{- if .Values.shell }}
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.12.0-2
+    hooks:
+      - id: shfmt
+        args: [-i, "2", -ci, -bn, -sr, -w]
+{{- end }}
+{{- if .Values.go }}
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.6.1
+    hooks:
+      - id: golangci-lint
+{{- end }}
+{{- if .Values.python }}
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.4
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+{{- end }}
+{{- if .Values.markdown }}
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.18.1
+    hooks:
+      - id: markdownlint-cli2
+{{- end }}

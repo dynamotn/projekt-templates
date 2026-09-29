@@ -1,0 +1,19 @@
+// Command {{ .Name }} {{ .Values.summary | default "does one thing" }}.
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"{{ .Values.module | default (printf "gitlab.com/%s/%s" .User .Name) }}/internal/cli"
+)
+
+// version is set at build time with -ldflags.
+var version = "dev"
+
+func main() {
+	if err := cli.Run(os.Args[1:], version); err != nil {
+		fmt.Fprintf(os.Stderr, "{{ .Name }}: %v\n", err)
+		os.Exit(1)
+	}
+}

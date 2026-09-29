@@ -1,0 +1,7 @@
+vars:
+  - name: summary
+    prompt: What does the script do, in one line
+  - name: dybatpho
+    prompt: Build on the dybatpho helpers
+    type: bool
+    default: "no"

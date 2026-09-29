@@ -1,0 +1,13 @@
+description: fish plugin in ~/Working/personal/fish, under dynamo-config/fish-packages
+source:
+  template: fish-plugin
+register:
+  workspace: ~/Working/personal/fish
+  prefix: fish
+  tags: [fish, plugin, personal]
+  remote:
+    host: gl
+    group: dynamo-config/fish-packages
+    branch: main
+after:
+  - git add -A && git commit -q -m "Start {{ .Name }}"

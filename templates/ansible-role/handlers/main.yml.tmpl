@@ -1,0 +1,6 @@
+---
+- name: Restart {{ .Name }}
+  ansible.builtin.systemd_service:
+    name: "{{ "{{ " }}{{ .Name | replace "-" "_" }}_service{{ " }}" }}"
+    state: restarted
+  become: true

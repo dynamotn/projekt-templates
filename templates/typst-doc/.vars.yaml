@@ -1,0 +1,11 @@
+vars:
+  - name: title
+    prompt: Document title
+    default: '{{ .Name }}'
+    required: true
+  - name: paper
+    type: choice
+    choices: [a4, us-letter]
+    default: a4
+after:
+  - '{{ if lookPath "typst" }}typst compile main.typ{{ end }}'

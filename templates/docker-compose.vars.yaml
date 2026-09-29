@@ -1,0 +1,17 @@
+vars:
+  - name: service
+    prompt: Service name
+    default: "{{ .Name }}"
+  - name: image
+    default: alpine:3.22
+  - name: restart
+    type: choice
+    choices: [unless-stopped, always, on-failure, "no"]
+    default: unless-stopped
+  - name: port
+    type: int
+  - name: timezone
+    default: Asia/Ho_Chi_Minh
+  - name: healthcheck
+    prompt: Healthcheck command
+    default: exit 0

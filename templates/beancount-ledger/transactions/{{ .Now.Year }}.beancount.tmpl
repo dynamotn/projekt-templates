@@ -1,0 +1,5 @@
+;; Transactions of {{ .Now.Year }}, newest last.
+
+{{ .Date }} * "Example" "What was bought"
+  Expenses:Food                      0 {{ .Values.currency | default "VND" }}
+  Assets:{{ .Values.bank | default "Bank" }}:Checking

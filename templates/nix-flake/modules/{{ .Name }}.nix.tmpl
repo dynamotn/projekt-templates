@@ -1,0 +1,23 @@
+{
+  lib,
+  stdenv,
+}:
+
+stdenv.mkDerivation {
+  pname = "{{ .Name }}";
+  version = "0.1.0";
+
+  src = ../.;
+
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/share/{{ .Name }}
+    runHook postInstall
+  '';
+
+  meta = {
+    description = "{{ .Values.summary | default "What it does, in one line" }}";
+    license = lib.licenses.mit;
+    platforms = [ "{{ .Values.system | default "x86_64-linux" }}" ];
+  };
+}

@@ -1,0 +1,12 @@
+vars:
+  - name: summary
+    prompt: What does the sketch do, in one line
+  - name: fqbn
+    prompt: Fully qualified board name
+    default: esp32:esp32:esp32
+  - name: baud
+    prompt: Serial baud rate
+    type: int
+    default: "115200"
+after:
+  - '{{ if lookPath "arduino-cli" }}arduino-cli compile --fqbn {{ .Values.fqbn | default "esp32:esp32:esp32" }} {{ .Name }}{{ end }}'

@@ -1,0 +1,10 @@
+description: Ruby gem with RSpec and RuboCop, in ~/Temp
+source:
+  template: ruby-gem
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [ruby, gem, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

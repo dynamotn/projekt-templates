@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "{{ .Name }}"
+
+if ARGV.empty?
+  warn "Usage: {{ .Name }} <value>"
+  exit 64
+end
+
+puts {{ .Values.module | default (.Name | title | replace "-" "") }}.run(ARGV.first)

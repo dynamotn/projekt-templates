@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.28)
+
+project({{ .Name }}
+  VERSION 0.1.0
+  DESCRIPTION "{{ .Values.summary | default "What it does, in one line" }}"
+  LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD {{ .Values.standard | default "23" }})
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+add_library({{ .Name }}_core src/{{ .Name }}.cpp)
+target_include_directories({{ .Name }}_core PUBLIC include)
+target_compile_options({{ .Name }}_core PRIVATE -Wall -Wextra -Wpedantic)
+{{ if eq .Values.kind "executable" }}
+add_executable({{ .Name }} src/main.cpp)
+target_link_libraries({{ .Name }} PRIVATE {{ .Name }}_core)
+{{ end }}
+include(CTest)
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()

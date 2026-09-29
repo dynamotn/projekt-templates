@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+require_relative "lib/{{ .Name }}/version"
+
+Gem::Specification.new do |spec|
+  spec.name = "{{ .Name }}"
+  spec.version = {{ .Values.module | default (.Name | title | replace "-" "") }}::VERSION
+  spec.authors = ["{{ .Values.author | default .User }}"]
+  spec.summary = "{{ .Values.summary | default "What it does, in one line" }}"
+  spec.license = "{{ .Values.license | default "MIT" }}"
+  spec.required_ruby_version = ">= {{ .Values.rubyVersion | default "3.4" }}"
+
+  spec.files = Dir["lib/**/*.rb", "README.md", "LICENSE"]
+  spec.require_paths = ["lib"]
+{{- if .Values.cli }}
+  spec.bindir = "exe"
+  spec.executables = ["{{ .Name }}"]
+{{- end }}
+end

@@ -1,0 +1,13 @@
+vars:
+  - name: package
+    prompt: Proto package, without the version
+    default: '{{ .Name | replace "-" "" }}'
+    required: true
+  - name: service
+    prompt: Service name
+    default: '{{ .Name | title | replace "-" "" }}Service'
+  - name: summary
+    prompt: What does the service do, in one line
+after:
+  - '{{ if lookPath "buf" }}buf lint{{ end }}'
+  - '{{ if lookPath "buf" }}buf format -w{{ end }}'

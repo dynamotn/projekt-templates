@@ -1,0 +1,17 @@
+vars:
+  - name: package
+    prompt: Import name of the package
+    default: '{{ .Name | replace "-" "_" }}'
+    required: true
+  - name: summary
+    prompt: What does it do, in one line
+  - name: pythonVersion
+    prompt: Minimum Python version
+    default: "3.13"
+  - name: cli
+    prompt: Give it a console script
+    type: bool
+    default: "yes"
+after:
+  - '{{ if lookPath "uv" }}uv sync{{ end }}'
+  - '{{ if lookPath "git" }}git init -q{{ end }}'

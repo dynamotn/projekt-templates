@@ -1,0 +1,23 @@
+# GitHub Actions is full of ${{ }}, so the template's own actions move out of
+# the way instead of being escaped everywhere.
+delims: ["<%", "%>"]
+vars:
+  - name: workflow
+    prompt: Workflow name
+    default: "{{ .Name }}"
+  - name: job
+    prompt: Job id
+    default: check
+  - name: branch
+    default: main
+  - name: runner
+    type: choice
+    choices: [ubuntu-latest, macos-latest, windows-latest]
+    default: ubuntu-latest
+  - name: stepName
+    default: Run checks
+  - name: run
+    prompt: Command the job runs
+    default: make lint test
+  - name: setup
+    prompt: Extra setup steps, as YAML (blank for none)

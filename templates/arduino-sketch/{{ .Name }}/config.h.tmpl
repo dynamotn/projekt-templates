@@ -1,0 +1,6 @@
+#pragma once
+
+// Everything a second board would want to change, in one place.
+constexpr unsigned long SERIAL_BAUD = {{ .Values.baud | default 115200 }};
+constexpr int LED_PIN = LED_BUILTIN;
+constexpr unsigned long BLINK_MS = 500;

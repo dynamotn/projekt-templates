@@ -1,0 +1,10 @@
+vars:
+  - name: summary
+    prompt: What does it do, in one line
+  - name: dotnetVersion
+    prompt: Target framework
+    type: choice
+    choices: [net8.0, net9.0, net10.0]
+    default: net10.0
+after:
+  - '{{ if lookPath "dotnet" }}dotnet restore{{ end }}'

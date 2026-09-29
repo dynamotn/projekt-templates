@@ -1,0 +1,33 @@
+# {{ .Name }} — {{ .Values.summary | default "what this diagram shows" }}
+
+direction: {{ .Values.direction | default "right" }}
+
+vars: {
+  d2-config: {
+    layout-engine: {{ .Values.layout | default "elk" }}
+    theme-id: {{ .Values.theme | default "300" }}
+  }
+}
+
+client: {
+  shape: person
+  label: "{{ .Values.actor | default "User" }}"
+}
+
+service: {
+  label: "{{ .Values.service | default .Name }}"
+  shape: rectangle
+
+  api: API
+  worker: Worker
+}
+
+store: {
+  shape: cylinder
+  label: "{{ .Values.store | default "Database" }}"
+}
+
+client -> service.api: request
+service.api -> service.worker: enqueue
+service.worker -> store: write
+store -> service.api: read

@@ -1,0 +1,22 @@
+# {{ .Name }} — {{ .Values.summary | default "what this unit deploys" }}
+
+include "root" {
+  path = find_in_parent_folders("root.hcl")
+}
+
+terraform {
+  source = "{{ .Values.module | default (printf "../../modules/%s" .Name) }}"
+}
+
+locals {
+  environment = "{{ .Values.environment | default "dev" }}"
+}
+
+inputs = {
+  name = "{{ .Name }}-${local.environment}"
+
+  tags = {
+    Environment = local.environment
+    Unit        = "{{ .Name }}"
+  }
+}

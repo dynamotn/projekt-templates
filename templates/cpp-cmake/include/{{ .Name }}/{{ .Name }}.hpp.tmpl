@@ -1,0 +1,11 @@
+#pragma once
+
+#include <string>
+#include <string_view>
+
+namespace {{ .Name | replace "-" "_" }} {
+
+// {{ .Values.summary | default "What this does, in one line" }}
+[[nodiscard]] std::string run(std::string_view value);
+
+}  // namespace {{ .Name | replace "-" "_" }}

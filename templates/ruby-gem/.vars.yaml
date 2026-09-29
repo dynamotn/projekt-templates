@@ -1,0 +1,16 @@
+vars:
+  - name: module
+    prompt: Ruby module name
+    default: '{{ .Name | title | replace "-" "" }}'
+    required: true
+  - name: summary
+    prompt: What does it do, in one line
+  - name: rubyVersion
+    prompt: Minimum Ruby version
+    default: "3.4"
+  - name: cli
+    prompt: Ship an executable in exe/
+    type: bool
+    default: "no"
+after:
+  - '{{ if lookPath "bundle" }}bundle install{{ end }}'

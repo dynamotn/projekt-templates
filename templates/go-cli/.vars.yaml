@@ -1,0 +1,18 @@
+vars:
+  - name: module
+    prompt: Go module path
+    default: 'gitlab.com/{{ .User }}/{{ .Name }}'
+    required: true
+  - name: summary
+    prompt: What does it do, in one line
+  - name: goVersion
+    prompt: Go version
+    default: "1.26"
+  - name: ci
+    prompt: Which CI to write
+    type: choice
+    choices: [gitlab, github, none]
+    default: gitlab
+after:
+  - '{{ if lookPath "go" }}go mod tidy{{ end }}'
+  - '{{ if lookPath "git" }}git init -q{{ end }}'

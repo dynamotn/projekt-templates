@@ -1,0 +1,13 @@
+vars:
+  - name: contract
+    prompt: Contract name
+    default: '{{ .Name | title | replace "-" "" }}'
+    required: true
+  - name: summary
+    prompt: What does the contract do, in one line
+  - name: solcVersion
+    prompt: Solidity version
+    default: "0.8.28"
+after:
+  - '{{ if lookPath "forge" }}forge install foundry-rs/forge-std --no-git{{ end }}'
+  - '{{ if lookPath "forge" }}forge fmt{{ end }}'

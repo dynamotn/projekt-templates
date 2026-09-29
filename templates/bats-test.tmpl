@@ -1,0 +1,22 @@
+setup() {
+  load test_helper
+  setup_dotfiles_test_env
+  . "${DOTFILES_DIR}/scripts/lib/{{ .Values.area | default .Name }}.sh"
+}
+
+function run_{{ .Values.verb | default "run" }} {
+  local argument
+  dybatpho::expect_args argument -- "$@"
+  {{ .Values.area | default .Name }}::{{ .Values.verb | default "run" }} "${argument}"
+}
+
+@test "{{ .Values.area | default .Name }}::{{ .Values.verb | default "run" }} returns what it was given" {
+  run run_{{ .Values.verb | default "run" }} "value"
+  [ "${status}" -eq 0 ]
+  [ "${output}" = "value" ]
+}
+
+@test "{{ .Values.area | default .Name }}::{{ .Values.verb | default "run" }} refuses a missing argument" {
+  run {{ .Values.area | default .Name }}::{{ .Values.verb | default "run" }}
+  [ "${status}" -ne 0 ]
+}

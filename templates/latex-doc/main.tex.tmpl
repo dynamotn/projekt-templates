@@ -1,0 +1,25 @@
+\documentclass[11pt,a4paper]{ {{- .Values.documentclass | default "article" -}} }
+
+\usepackage[T5]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[{{ .Values.language | default "english" }}]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{microtype}
+
+\geometry{margin=2.5cm}
+\hypersetup{hidelinks}
+
+\title{ {{- .Values.title | default .Name -}} }
+\author{ {{- .Values.author | default .User -}} }
+\date{ {{- .Date -}} }
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\input{sections/introduction}
+
+\end{document}

@@ -1,0 +1,10 @@
+description: LaTeX document built with latexmk, in ~/Temp
+source:
+  template: latex-doc
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [latex, document, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

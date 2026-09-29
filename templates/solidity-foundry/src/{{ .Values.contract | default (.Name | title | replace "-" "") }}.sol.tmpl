@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: {{ .Values.license | default "MIT" }}
+pragma solidity ^{{ .Values.solcVersion | default "0.8.28" }};
+
+/// @title {{ .Values.contract | default (.Name | title | replace "-" "") }}
+/// @notice {{ .Values.summary | default "What this contract does, in one line" }}
+contract {{ .Values.contract | default (.Name | title | replace "-" "") }} {
+    /// @notice Thrown when the caller is not the owner.
+    error NotOwner();
+
+    /// @notice Emitted when the stored value changes.
+    event ValueSet(uint256 indexed value);
+
+    address public immutable owner;
+    uint256 public value;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        if (msg.sender != owner) revert NotOwner();
+        _;
+    }
+
+    /// @notice Store a new value.
+    function setValue(uint256 newValue) external onlyOwner {
+        value = newValue;
+        emit ValueSet(newValue);
+    }
+}

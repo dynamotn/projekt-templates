@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+// {{ .Values.summary | default "What this service does, in one line" }}
+package {{ .Values.package | default (.Name | replace "-" "") }}.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// {{ .Values.service | default (printf "%sService" (.Name | title | replace "-" "")) }} is the only entry point of this module.
+service {{ .Values.service | default (printf "%sService" (.Name | title | replace "-" "")) }} {
+  // Run does the one thing this service exists for.
+  rpc Run(RunRequest) returns (RunResponse);
+}
+
+message RunRequest {
+  // The value to work on. Must not be empty.
+  string value = 1;
+}
+
+message RunResponse {
+  // The value, as the service saw it.
+  string value = 1;
+
+  // When the service answered.
+  google.protobuf.Timestamp answered_at = 2;
+}

@@ -1,0 +1,15 @@
+setup() {
+  load test_helper
+  . "${PROJECT_DIR}/lib/{{ .Values.area | default .Name }}.sh"
+}
+
+@test "{{ .Values.area | default .Name }}::run returns what it was given" {
+  run {{ .Values.area | default .Name }}::run "value"
+  [ "${status}" -eq 0 ]
+  [ "${output}" = "value" ]
+}
+
+@test "{{ .Values.area | default .Name }}::run refuses a missing argument" {
+  run {{ .Values.area | default .Name }}::run
+  [ "${status}" -ne 0 ]
+}

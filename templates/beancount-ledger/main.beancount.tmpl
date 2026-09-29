@@ -1,0 +1,6 @@
+;; {{ .Name }} — opened {{ .Date }}
+option "title" "{{ .Name | title }}"
+option "operating_currency" "{{ .Values.currency | default "VND" }}"
+
+include "accounts/opening.beancount"
+include "transactions/{{ .Now.Year }}.beancount"

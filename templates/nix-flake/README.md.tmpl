@@ -1,0 +1,9 @@
+# {{ .Name }}
+
+{{ .Values.summary | default "One line on what this flake provides." }}
+
+```bash
+nix develop
+nix build
+nix flake check
+```

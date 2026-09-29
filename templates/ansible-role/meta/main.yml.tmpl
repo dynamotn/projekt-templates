@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: {{ .Name | replace "-" "_" }}
+  author: {{ .Values.author | default .User }}
+  description: {{ .Values.summary | default "What the role does, in one line" }}
+  license: {{ .Values.license | default "MIT" }}
+  min_ansible_version: "{{ .Values.minAnsible | default "2.18" }}"
+  platforms:
+    - name: {{ .Values.platform | default "Archlinux" }}
+      versions:
+        - all
+  galaxy_tags: []
+
+dependencies: []

@@ -1,0 +1,9 @@
+# {{ .Name }}
+
+{{ .Values.summary | default "One line on what this sketch does." }}
+
+```bash
+arduino-cli compile --fqbn {{ .Values.fqbn | default "esp32:esp32:esp32" }} {{ .Name }}
+arduino-cli upload --fqbn {{ .Values.fqbn | default "esp32:esp32:esp32" }} -p /dev/ttyUSB0 {{ .Name }}
+arduino-cli monitor -p /dev/ttyUSB0 -c baudrate={{ .Values.baud | default 115200 }}
+```

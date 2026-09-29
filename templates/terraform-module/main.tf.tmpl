@@ -1,0 +1,22 @@
+# {{ .Name }} — {{ .Values.summary | default "what the module creates" }}
+
+locals {
+  enabled = var.enabled
+
+  tags = merge(
+    {
+      Name      = var.name
+      Module    = "{{ .Name }}"
+      ManagedBy = "opentofu"
+    },
+    var.tags,
+  )
+}
+
+resource "null_resource" "placeholder" {
+  count = local.enabled ? 1 : 0
+
+  triggers = {
+    name = var.name
+  }
+}

@@ -1,0 +1,39 @@
+// Package cli holds everything main is too small to hold, so the behaviour
+// stays testable without building a binary.
+package cli
+
+import (
+	"errors"
+	"flag"
+	"fmt"
+	"io"
+	"os"
+)
+
+// ErrUsage is returned when the arguments do not name anything to do.
+var ErrUsage = errors.New("nothing to do")
+
+// Run parses args and does the work. It returns an error rather than exiting,
+// so a test can call it.
+func Run(args []string, version string) error {
+	fs := flag.NewFlagSet("{{ .Name }}", flag.ContinueOnError)
+	fs.SetOutput(io.Discard)
+	showVersion := fs.Bool("version", false, "print the version and exit")
+	if err := fs.Parse(args); err != nil {
+		return err
+	}
+
+	if *showVersion {
+		fmt.Fprintln(os.Stdout, version)
+		return nil
+	}
+
+	if fs.NArg() == 0 {
+		return ErrUsage
+	}
+
+	for _, arg := range fs.Args() {
+		fmt.Fprintln(os.Stdout, arg)
+	}
+	return nil
+}

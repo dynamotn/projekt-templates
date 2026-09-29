@@ -1,0 +1,4 @@
+# Which CI the project gets. A recipe cannot pin a value non-interactively —
+# only `vars` defaults, which apply under --interactive — so the answer a plain
+# `t new go-cli` should give lives here.
+ci: gitlab

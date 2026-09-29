@@ -1,0 +1,12 @@
+import pytest
+
+from {{ .Values.package | default (.Name | replace "-" "_") }}.core import run
+
+
+def test_run_returns_its_argument():
+    assert run("value") == "value"
+
+
+def test_run_refuses_an_empty_value():
+    with pytest.raises(ValueError):
+        run("")

@@ -1,0 +1,27 @@
+# {{ .Values.project | default .Name }}
+
+{{ .Values.summary | default "One line on what this is and who it is for." }}
+
+## Install
+
+```bash
+{{ .Values.install | default (printf "git clone %s" (.Values.repo | default "<repo url>")) }}
+```
+
+## Usage
+
+```bash
+{{ .Values.usage | default .Name }}
+```
+
+## Development
+
+```bash
+prek install          # hooks
+make test             # tests
+make lint             # linters
+```
+
+## Licence
+
+{{ .Values.license | default "MIT" }} — see [LICENSE](LICENSE).

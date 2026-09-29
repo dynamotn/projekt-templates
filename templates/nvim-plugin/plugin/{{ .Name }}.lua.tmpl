@@ -1,0 +1,3 @@
+-- Guard, so sourcing the plugin twice is free.
+if vim.g.loaded_{{ .Name | replace "-" "_" | replace "." "_" }} then return end
+vim.g.loaded_{{ .Name | replace "-" "_" | replace "." "_" }} = true

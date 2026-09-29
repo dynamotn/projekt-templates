@@ -1,0 +1,12 @@
+vars:
+  - name: summary
+    prompt: What does the module create, in one line
+  - name: provider
+    type: choice
+    choices: [aws, azurerm, google, null]
+    default: aws
+  - name: terraformVersion
+    prompt: Minimum OpenTofu/Terraform version
+    default: "1.9"
+after:
+  - '{{ if lookPath "tofu" }}tofu fmt -recursive{{ end }}'

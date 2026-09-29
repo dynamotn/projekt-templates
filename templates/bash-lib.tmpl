@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# @file {{ .Values.area | default .Name }}.sh
+# @brief {{ .Values.summary | default "What this library is for, in one line" }}
+# @description {{ .Values.description | default "Why it exists rather than what it does: the constraint that made a library the right shape, and the decision a reader would otherwise have to rediscover." }}
+
+#######################################
+# @description {{ .Values.verbSummary | default "What the function does" }}
+# @arg $1 string {{ .Values.argSummary | default "What the argument is" }}
+# @stdout {{ .Values.stdout | default "What it prints" }}
+# @exitcode 0 It worked
+# @exitcode 1 It did not
+#######################################
+function {{ .Values.area | default .Name }}::{{ .Values.verb | default "run" }} {
+  local argument
+  dybatpho::expect_args argument -- "$@"
+
+  printf '%s' "${argument}"
+}

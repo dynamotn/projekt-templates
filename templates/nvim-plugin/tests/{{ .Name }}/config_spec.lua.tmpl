@@ -1,0 +1,13 @@
+local config = require('{{ .Name }}.config')
+
+describe('{{ .Name }}.config', function()
+  it('starts from the defaults', function()
+    config.setup()
+    assert.is_true(config.options.enabled)
+  end)
+
+  it('lets the caller turn it off', function()
+    config.setup({ enabled = false })
+    assert.is_false(config.options.enabled)
+  end)
+end)

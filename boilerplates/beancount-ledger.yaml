@@ -1,0 +1,14 @@
+description: Beancount books in ~/Working/personal/finance, under dynamo-finance
+source:
+  template: beancount-ledger
+register:
+  workspace: ~/Working/personal/finance
+  prefix: finance
+  tags: [beancount, finance]
+  remote:
+    host: gl
+    group: dynamo-finance
+    branch: main
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

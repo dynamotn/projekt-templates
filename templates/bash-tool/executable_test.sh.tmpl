@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# @file test.sh
+# @brief Run the bats suite
+set -euo pipefail
+
+PROJECT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+readonly PROJECT_DIR
+
+exec bats --recursive "${PROJECT_DIR}/test"

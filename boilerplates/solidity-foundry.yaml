@@ -1,0 +1,10 @@
+description: Solidity contract with Foundry tests, in ~/Temp
+source:
+  template: solidity-foundry
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [solidity, foundry, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

@@ -1,0 +1,1 @@
+{{ if ne .Values.kind "executable" }}src/main.cpp{{ end }}

@@ -1,0 +1,23 @@
+# syntax=docker/dockerfile:1
+FROM {{ .Values.base | default "alpine:3.22" }} AS runtime
+
+{{- with .Values.packages }}
+
+RUN apk add --no-cache {{ join " " . }}
+{{- end }}
+
+WORKDIR {{ .Values.workdir | default "/app" }}
+
+COPY . .
+
+{{- with .Values.port }}
+
+EXPOSE {{ . }}
+{{- end }}
+
+USER {{ .Values.user | default "nobody" }}
+
+ENTRYPOINT [{{ .Values.entrypoint | default "/bin/sh" | quote }}]
+{{- with .Values.cmd }}
+CMD [{{ . | quote }}]
+{{- end }}

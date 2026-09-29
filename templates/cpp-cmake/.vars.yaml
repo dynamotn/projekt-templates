@@ -1,0 +1,15 @@
+vars:
+  - name: summary
+    prompt: What does it do, in one line
+  - name: standard
+    prompt: C++ standard
+    type: choice
+    choices: ["17", "20", "23"]
+    default: "23"
+  - name: kind
+    prompt: Build an executable or a library
+    type: choice
+    choices: [executable, library]
+    default: executable
+after:
+  - '{{ if lookPath "cmake" }}cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON{{ end }}'

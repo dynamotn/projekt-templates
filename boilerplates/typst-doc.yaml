@@ -1,0 +1,10 @@
+description: Typst document with its look in a template, in ~/Temp
+source:
+  template: typst-doc
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [typst, document, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

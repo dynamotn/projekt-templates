@@ -1,0 +1,27 @@
+BINARY  = {{ .Name }}
+VERSION = $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
+LDFLAGS = -X main.version=$(VERSION)
+
+.DEFAULT_GOAL := help
+
+.PHONY: help
+help: ## Show this help
+	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) \
+		| awk 'BEGIN {FS = ":.*?## "} {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: build
+build: ## Build the binary into bin/
+	go build -ldflags '$(LDFLAGS)' -o bin/$(BINARY) ./cmd/$(BINARY)
+
+.PHONY: test
+test: ## Run the tests with the race detector
+	go test -race ./...
+
+.PHONY: lint
+lint: ## Vet and lint
+	go vet ./...
+	golangci-lint run
+
+.PHONY: clean
+clean: ## Remove build output
+	rm -rf bin

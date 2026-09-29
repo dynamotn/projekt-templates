@@ -1,0 +1,7 @@
+vars:
+  - name: summary
+    prompt: What the module deploys, in one line
+  - name: sku
+    type: choice
+    choices: [Standard_LRS, Standard_GRS, Standard_ZRS]
+    default: Standard_LRS

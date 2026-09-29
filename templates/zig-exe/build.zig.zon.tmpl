@@ -1,0 +1,12 @@
+.{
+    .name = .{{ .Name | replace "-" "_" }},
+    .version = "0.1.0",
+    .minimum_zig_version = "{{ .Values.zigVersion | default "0.15.1" }}",
+    .fingerprint = 0x0,
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

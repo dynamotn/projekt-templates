@@ -1,0 +1,8 @@
+vars:
+  - name: image
+    prompt: Default job image
+    default: alpine:3.22
+  - name: lint
+    default: make lint
+  - name: test
+    default: make test

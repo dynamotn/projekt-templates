@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# @file {{ .Name }}
+# @brief {{ .Values.summary | default "What this script does, in one line" }}
+set -euo pipefail
+
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+readonly SCRIPT_DIR
+
+{{- if .Values.dybatpho }}
+
+# shellcheck source=/dev/null
+source "${SCRIPT_DIR}/lib/dybatpho/index.sh"
+
+dybatpho::register_err_handler
+
+function main {
+  dybatpho::expect_args target -- "$@"
+  dybatpho::info "Working on ${target}"
+}
+
+dybatpho::run main "$@"
+{{- else }}
+
+function usage {
+  cat <<'USAGE'
+{{ .Name }} — {{ .Values.summary | default "what it does" }}
+
+Usage: {{ .Name }} [-h] <argument>
+USAGE
+}
+
+function main {
+  if [[ $# -eq 0 || ${1} == "-h" ]]; then
+    usage
+    exit 0
+  fi
+  printf '%s\n' "${1}"
+}
+
+main "$@"
+{{- end }}

@@ -1,0 +1,19 @@
+// The look of the document, kept apart from what it says.
+#let doc(title: "", author: "", date: none, body) = {
+  set document(title: title, author: author)
+  set page(paper: "{{ .Values.paper | default "a4" }}", numbering: "1", margin: 2.5cm)
+  set text(font: "Iosevka Dynamo", size: 11pt, lang: "en")
+  set par(justify: true, leading: 0.75em)
+  set heading(numbering: "1.1")
+
+  align(center)[
+    #text(size: 20pt, weight: "bold")[#title]
+    #v(0.5em)
+    #text(size: 11pt)[#author]
+    #v(0.2em)
+    #text(size: 10pt, fill: gray)[#date.display("[year]-[month]-[day]")]
+  ]
+  v(1.5em)
+
+  body
+}

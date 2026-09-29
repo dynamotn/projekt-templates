@@ -1,0 +1,9 @@
+# {{ .Name }}
+
+Books in {{ .Values.currency | default "VND" }}, opened {{ .Values.startDate | default (printf "%d-01-01" .Now.Year) }}.
+
+```bash
+bean-check main.beancount
+bean-report main.beancount balances
+fava main.beancount
+```

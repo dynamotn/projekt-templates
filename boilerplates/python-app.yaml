@@ -1,0 +1,13 @@
+description: Python project with uv, ruff and pytest, in ~/Working/personal/tools
+source:
+  template: python-app
+register:
+  workspace: ~/Working/personal/tools
+  prefix: tool
+  tags: [python, tool, personal]
+  remote:
+    host: gl
+    group: dynamo-tools
+    branch: main
+after:
+  - git add -A && git commit -q -m "Start {{ .Name }}"

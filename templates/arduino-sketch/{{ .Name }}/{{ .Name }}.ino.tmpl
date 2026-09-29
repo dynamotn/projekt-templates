@@ -1,0 +1,19 @@
+// {{ .Name }} — {{ .Values.summary | default "what this sketch does, in one line" }}
+
+#include "config.h"
+
+void setup() {
+  Serial.begin(SERIAL_BAUD);
+  while (!Serial) {
+    ;  // wait for the port on boards where it is not ready at once
+  }
+  pinMode(LED_PIN, OUTPUT);
+  Serial.println(F("{{ .Name }} ready"));
+}
+
+void loop() {
+  digitalWrite(LED_PIN, HIGH);
+  delay(BLINK_MS);
+  digitalWrite(LED_PIN, LOW);
+  delay(BLINK_MS);
+}

@@ -1,0 +1,17 @@
+vars:
+  - name: shell
+    prompt: Add shellcheck and shfmt
+    type: bool
+    default: "no"
+  - name: go
+    prompt: Add golangci-lint
+    type: bool
+    default: "no"
+  - name: python
+    prompt: Add ruff
+    type: bool
+    default: "no"
+  - name: markdown
+    prompt: Add markdownlint-cli2
+    type: bool
+    default: "yes"

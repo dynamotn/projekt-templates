@@ -1,0 +1,17 @@
+/** {{ .Values.summary | default "What this module does, in one line" }} */
+
+/** Thrown when {@link run} is given nothing to work on. */
+export class EmptyValueError extends Error {
+  constructor() {
+    super("value must not be empty");
+    this.name = "EmptyValueError";
+  }
+}
+
+/** Returns `value` as this library sees it. */
+export function run(value: string): string {
+  if (value.length === 0) {
+    throw new EmptyValueError();
+  }
+  return value;
+}

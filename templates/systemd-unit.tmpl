@@ -1,0 +1,28 @@
+[Unit]
+Description={{ .Values.summary | default (printf "%s service" .Name) }}
+Documentation={{ .Values.docs | default "https://example.com" }}
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type={{ .Values.type | default "simple" }}
+ExecStart={{ .Values.exec | default (printf "/usr/bin/%s" .Name) }}
+Restart={{ .Values.restart | default "on-failure" }}
+RestartSec=5s
+User={{ .Values.user | default .User }}
+WorkingDirectory={{ .Values.workdir | default (printf "/var/lib/%s" .Name) }}
+
+# Least privilege by default; loosen a line only when the service actually
+# fails without it.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+ReadWritePaths={{ .Values.workdir | default (printf "/var/lib/%s" .Name) }}
+
+[Install]
+WantedBy={{ .Values.wantedBy | default "multi-user.target" }}

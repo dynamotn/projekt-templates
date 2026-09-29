@@ -1,0 +1,12 @@
+vars:
+  - name: summary
+    prompt: What does the role do, in one line
+  - name: platform
+    type: choice
+    choices: [Archlinux, Debian, Ubuntu, EL]
+    default: Archlinux
+  - name: minAnsible
+    prompt: Minimum ansible-core version
+    default: "2.18"
+after:
+  - '{{ if lookPath "ansible-lint" }}ansible-lint{{ end }}'

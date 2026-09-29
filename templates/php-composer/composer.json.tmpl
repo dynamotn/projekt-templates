@@ -1,0 +1,26 @@
+{
+  "name": "{{ .Values.vendor | default .User }}/{{ .Name }}",
+  "description": "{{ .Values.summary | default "What it does, in one line" }}",
+  "type": "library",
+  "license": "{{ .Values.license | default "MIT" }}",
+  "authors": [{ "name": "{{ .Values.author | default .User }}" }],
+  "require": {
+    "php": ">={{ .Values.phpVersion | default "8.4" }}"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.5",
+    "friendsofphp/php-cs-fixer": "^3.75",
+    "squizlabs/php_codesniffer": "^3.11"
+  },
+  "autoload": {
+    "psr-4": { "{{ .Values.namespace | default (.User | title) }}\\{{ .Name | title | replace "-" "" }}\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "{{ .Values.namespace | default (.User | title) }}\\{{ .Name | title | replace "-" "" }}\\Tests\\": "tests/" }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "lint": "phpcs --standard=PSR12 src tests",
+    "format": "php-cs-fixer fix"
+  }
+}

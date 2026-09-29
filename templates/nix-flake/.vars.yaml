@@ -1,0 +1,10 @@
+vars:
+  - name: summary
+    prompt: What does the flake provide, in one line
+  - name: system
+    type: choice
+    choices: [x86_64-linux, aarch64-linux, aarch64-darwin]
+    default: x86_64-linux
+after:
+  - '{{ if lookPath "git" }}git init -q && git add -A{{ end }}'
+  - '{{ if lookPath "nix" }}nix flake check{{ end }}'

@@ -1,0 +1,27 @@
+// {{ .Name }} — {{ .Values.summary | default "what this schema holds" }}
+
+Project {{ .Name | replace "-" "_" }} {
+  database_type: '{{ .Values.database | default "PostgreSQL" }}'
+  Note: '{{ .Values.summary | default "What this schema holds" }}'
+}
+
+Table {{ .Values.table | default "account" }} {
+  id         bigint      [pk, increment]
+  name       varchar(64) [not null, unique]
+  created_at timestamp   [not null, default: `now()`]
+
+  Note: 'One row per {{ .Values.table | default "account" }}.'
+}
+
+Table {{ .Values.child | default "event" }} {
+  id         bigint    [pk, increment]
+  account_id bigint    [not null]
+  kind       varchar(32) [not null]
+  created_at timestamp [not null, default: `now()`]
+
+  Indexes {
+    (account_id, created_at) [name: 'idx_{{ .Values.child | default "event" }}_account_time']
+  }
+}
+
+Ref: {{ .Values.child | default "event" }}.account_id > {{ .Values.table | default "account" }}.id [delete: cascade]

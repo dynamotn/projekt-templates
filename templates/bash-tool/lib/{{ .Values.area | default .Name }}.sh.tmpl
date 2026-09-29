@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# @file {{ .Values.area | default .Name }}.sh
+# @brief {{ .Values.summary | default "What this library is for, in one line" }}
+# @description Why it exists rather than what it does: the constraint that made
+# a library the right shape, and the decision a reader would otherwise have to
+# rediscover.
+
+#######################################
+# @description Do the one thing this library exists for
+# @arg $1 string Value to work on
+# @stdout The value, as the library sees it
+# @exitcode 0 It worked
+# @exitcode 1 The argument was missing
+#######################################
+function {{ .Values.area | default .Name }}::run {
+  local value
+  dybatpho::expect_args value -- "$@"
+
+  printf '%s' "${value}"
+}

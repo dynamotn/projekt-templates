@@ -1,0 +1,27 @@
+vars:
+  - name: summary
+    prompt: What the service does, in one line
+  - name: docs
+    prompt: Documentation URL
+    default: https://example.com
+  - name: type
+    type: choice
+    choices: [simple, exec, oneshot, notify, forking]
+    default: simple
+  - name: exec
+    prompt: ExecStart command
+    default: '/usr/bin/{{ .Name }}'
+  - name: restart
+    type: choice
+    choices: [on-failure, always, "no"]
+    default: on-failure
+  - name: user
+    prompt: User the service runs as
+    default: '{{ .User }}'
+  - name: workdir
+    prompt: Working directory
+    default: '/var/lib/{{ .Name }}'
+  - name: wantedBy
+    type: choice
+    choices: [multi-user.target, default.target, graphical.target]
+    default: multi-user.target

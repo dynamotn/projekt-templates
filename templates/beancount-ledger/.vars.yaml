@@ -1,0 +1,13 @@
+vars:
+  - name: currency
+    type: choice
+    choices: [VND, USD, EUR]
+    default: VND
+  - name: startDate
+    prompt: Date the books open
+    default: '{{ .Now.Year }}-01-01'
+  - name: bank
+    prompt: Name of the first bank account
+    default: Bank
+after:
+  - '{{ if lookPath "bean-check" }}bean-check main.beancount{{ end }}'

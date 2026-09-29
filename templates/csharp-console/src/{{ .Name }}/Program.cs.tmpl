@@ -1,0 +1,10 @@
+using {{ .Name | replace "-" "" }};
+
+if (args.Length == 0)
+{
+    Console.Error.WriteLine("Usage: {{ .Name }} <value>");
+    return 64;
+}
+
+Console.WriteLine(Runner.Run(args[0]));
+return 0;

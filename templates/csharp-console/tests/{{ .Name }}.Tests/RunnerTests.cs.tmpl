@@ -1,0 +1,18 @@
+using {{ .Name | replace "-" "" }};
+
+namespace {{ .Name | replace "-" "" }}.Tests;
+
+public class RunnerTests
+{
+    [Fact]
+    public void RunReturnsItsArgument()
+    {
+        Assert.Equal("value", Runner.Run("value"));
+    }
+
+    [Fact]
+    public void RunRefusesAnEmptyValue()
+    {
+        Assert.Throws<ArgumentException>(() => Runner.Run(""));
+    }
+}

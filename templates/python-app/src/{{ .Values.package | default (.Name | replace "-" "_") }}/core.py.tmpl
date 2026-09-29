@@ -1,0 +1,8 @@
+"""The work itself, kept out of the CLI so a test can call it."""
+
+
+def run(value: str) -> str:
+    """Return *value* as this package sees it."""
+    if not value:
+        raise ValueError("value must not be empty")
+    return value

@@ -1,0 +1,25 @@
+# {{ .Name }}
+
+{{ .Values.summary | default "One line on what this Neovim plugin does." }}
+
+## Install
+
+```lua
+{
+  '{{ .User }}/{{ .Name }}',
+  opts = {},
+}
+```
+
+## Usage
+
+```vim
+:{{ .Values.command | default (.Name | replace "-" " " | title | replace " " "") }}
+```
+
+## Development
+
+```bash
+stylua .
+nvim --headless -c 'helptags doc' -c q
+```

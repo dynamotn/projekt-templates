@@ -1,0 +1,9 @@
+# {{ .Name }}
+
+{{ .Values.summary | default "One line on what this policy decides." }}
+
+```bash
+opa test policy
+opa fmt -d policy
+regal lint policy
+```

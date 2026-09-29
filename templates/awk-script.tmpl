@@ -1,0 +1,15 @@
+#!/usr/bin/env -S awk -f
+# {{ .Name }} — {{ .Values.summary | default "what this filter does, in one line" }}
+
+BEGIN {
+    FS = "{{ .Values.fs | default "\t" }}"
+    OFS = "{{ .Values.ofs | default "\t" }}"
+}
+
+{{ .Values.pattern | default "NR > 1" }} {
+    print $1, $2
+}
+
+END {
+    printf "%d record(s)\n", NR > "/dev/stderr"
+}

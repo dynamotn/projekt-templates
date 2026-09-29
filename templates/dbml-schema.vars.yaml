@@ -1,0 +1,13 @@
+vars:
+  - name: summary
+    prompt: What the schema holds, in one line
+  - name: database
+    type: choice
+    choices: [PostgreSQL, MySQL, SQLite, MSSQL]
+    default: PostgreSQL
+  - name: table
+    prompt: Name of the main table
+    default: account
+  - name: child
+    prompt: Name of the table that references it
+    default: event

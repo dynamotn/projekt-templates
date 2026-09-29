@@ -1,0 +1,18 @@
+package {{ .Values.package | default (.Name | replace "-" "_") }}_test
+
+import rego.v1
+
+import data.{{ .Values.package | default (.Name | replace "-" "_") }}
+
+test_allows_a_complete_request if {
+	{{ .Values.package | default (.Name | replace "-" "_") }}.allow with input as {"owner": "someone", "draft": false}
+}
+
+test_refuses_a_request_without_an_owner if {
+	not {{ .Values.package | default (.Name | replace "-" "_") }}.allow with input as {"owner": "", "draft": false}
+	{{ .Values.package | default (.Name | replace "-" "_") }}.deny["owner must be set"] with input as {"owner": "", "draft": false}
+}
+
+test_refuses_a_draft if {
+	not {{ .Values.package | default (.Name | replace "-" "_") }}.allow with input as {"owner": "someone", "draft": true}
+}

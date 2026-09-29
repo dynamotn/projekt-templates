@@ -1,0 +1,29 @@
+"""Argument parsing and nothing else."""
+
+import argparse
+import sys
+from collections.abc import Sequence
+
+from {{ .Values.package | default (.Name | replace "-" "_") }} import __version__
+from {{ .Values.package | default (.Name | replace "-" "_") }}.core import run
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        prog="{{ .Name }}",
+        description="{{ .Values.summary | default "What it does, in one line" }}",
+    )
+    parser.add_argument("--version", action="version", version=__version__)
+    parser.add_argument("value", help="the value to work on")
+    args = parser.parse_args(argv)
+
+    try:
+        print(run(args.value))
+    except ValueError as err:
+        print(f"{{ .Name }}: {err}", file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

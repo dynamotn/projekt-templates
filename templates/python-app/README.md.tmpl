@@ -1,0 +1,11 @@
+# {{ .Name }}
+
+{{ .Values.summary | default "One line on what this is and who it is for." }}
+
+## Development
+
+```bash
+uv sync
+uv run pytest
+uv run ruff check .
+```

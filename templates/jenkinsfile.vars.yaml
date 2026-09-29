@@ -1,0 +1,15 @@
+vars:
+  - name: summary
+    prompt: What the pipeline builds, in one line
+  - name: agent
+    prompt: Agent label
+    default: linux
+  - name: branch
+    prompt: Branch that gets built
+    default: main
+  - name: lint
+    default: make lint
+  - name: test
+    default: make test
+  - name: build
+    default: make build

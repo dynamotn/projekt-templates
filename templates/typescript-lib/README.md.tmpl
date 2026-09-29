@@ -1,0 +1,9 @@
+# {{ with .Values.scope }}@{{ . }}/{{ end }}{{ .Name }}
+
+{{ .Values.summary | default "One line on what this library does." }}
+
+```bash
+pnpm test
+pnpm lint
+pnpm build
+```

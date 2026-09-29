@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+module {{ .Values.module | default (.Name | title | replace "-" "") }}
+  VERSION = "0.1.0"
+end

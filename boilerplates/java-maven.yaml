@@ -1,0 +1,10 @@
+description: Java project with Maven and JUnit 5, in ~/Temp
+source:
+  template: java-maven
+register:
+  workspace: ~/Temp
+  prefix: tmp
+  tags: [java, maven, scratch]
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

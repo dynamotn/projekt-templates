@@ -1,0 +1,8 @@
+vars:
+  - name: area
+    prompt: Library under test
+    default: "{{ .Name }}"
+    required: true
+  - name: verb
+    prompt: Function's verb
+    default: run

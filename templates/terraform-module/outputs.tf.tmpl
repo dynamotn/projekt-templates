@@ -1,0 +1,9 @@
+output "name" {
+  description = "The name the module was given."
+  value       = var.name
+}
+
+output "tags" {
+  description = "The tags the module applies, including the ones it adds itself."
+  value       = local.tags
+}

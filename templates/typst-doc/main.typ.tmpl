@@ -1,0 +1,15 @@
+#import "template.typ": doc
+
+#show: doc.with(
+  title: "{{ .Values.title | default .Name }}",
+  author: "{{ .Values.author | default .User }}",
+  date: datetime(year: {{ .Now.Year }}, month: {{ .Now.Month | int }}, day: {{ .Now.Day }}),
+)
+
+= Introduction
+
+What this document is for, and who has to read it.
+
+= Body
+
+#lorem(40)

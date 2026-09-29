@@ -1,0 +1,13 @@
+description: Nix flake in ~/Working/personal/infra, under dynamo-infra
+source:
+  template: nix-flake
+register:
+  workspace: ~/Working/personal/infra
+  prefix: infra
+  tags: [nix, infra]
+  remote:
+    host: gl
+    group: dynamo-infra
+    branch: main
+after:
+  - git commit -q -m "Start {{ .Name }}"

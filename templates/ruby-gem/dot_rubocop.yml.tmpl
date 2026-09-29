@@ -1,0 +1,10 @@
+AllCops:
+  TargetRubyVersion: {{ .Values.rubyVersion | default "3.4" }}
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: true
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*

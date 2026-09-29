@@ -1,0 +1,25 @@
+name: <% .Values.workflow | default .Name %>
+
+on:
+  push:
+    branches: [<% .Values.branch | default "main" %>]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  <% .Values.job | default "check" %>:
+    runs-on: <% .Values.runner | default "ubuntu-latest" %>
+    steps:
+      - uses: actions/checkout@v5
+<%- if .Values.setup %>
+<% .Values.setup | indent 6 | trim %>
+<%- end %>
+      - name: <% .Values.stepName | default "Run checks" %>
+        run: <% .Values.run | default "make lint test" %>

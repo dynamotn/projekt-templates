@@ -1,0 +1,32 @@
+[project]
+name = "{{ .Name }}"
+version = "0.1.0"
+description = "{{ .Values.summary | default "What it does, in one line" }}"
+readme = "README.md"
+requires-python = ">={{ .Values.pythonVersion | default "3.13" }}"
+authors = [{ name = "{{ .Values.author | default .User }}" }]
+license = { text = "{{ .Values.license | default "MIT" }}" }
+dependencies = []
+{{ if .Values.cli }}
+[project.scripts]
+{{ .Name }} = "{{ .Values.package | default (.Name | replace "-" "_") }}.cli:main"
+{{ end }}
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.14"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{ .Values.package | default (.Name | replace "-" "_") }}"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py{{ .Values.pythonVersion | default "3.13" | replace "." "" }}"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

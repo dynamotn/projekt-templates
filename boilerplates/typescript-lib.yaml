@@ -1,0 +1,13 @@
+description: TypeScript library with Biome and Vitest, in ~/Working/personal/tools
+source:
+  template: typescript-lib
+register:
+  workspace: ~/Working/personal/tools
+  prefix: tool
+  tags: [typescript, tool, personal]
+  remote:
+    host: gl
+    group: dynamo-tools
+    branch: main
+after:
+  - git add -A && git commit -q -m "Start {{ .Name }}"

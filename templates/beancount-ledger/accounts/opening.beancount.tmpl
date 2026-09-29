@@ -1,0 +1,11 @@
+{{ .Values.startDate | default (printf "%d-01-01" .Now.Year) }} open Assets:{{ .Values.bank | default "Bank" }}:Checking   {{ .Values.currency | default "VND" }}
+{{ .Values.startDate | default (printf "%d-01-01" .Now.Year) }} open Assets:Cash                          {{ .Values.currency | default "VND" }}
+{{ .Values.startDate | default (printf "%d-01-01" .Now.Year) }} open Liabilities:{{ .Values.bank | default "Bank" }}:Card  {{ .Values.currency | default "VND" }}
+{{ .Values.startDate | default (printf "%d-01-01" .Now.Year) }} open Income:Salary                        {{ .Values.currency | default "VND" }}
+{{ .Values.startDate | default (printf "%d-01-01" .Now.Year) }} open Expenses:Food                        {{ .Values.currency | default "VND" }}
+{{ .Values.startDate | default (printf "%d-01-01" .Now.Year) }} open Expenses:Transport                   {{ .Values.currency | default "VND" }}
+{{ .Values.startDate | default (printf "%d-01-01" .Now.Year) }} open Equity:Opening-Balances              {{ .Values.currency | default "VND" }}
+
+{{ .Values.startDate | default (printf "%d-01-01" .Now.Year) }} * "Opening balances"
+  Assets:{{ .Values.bank | default "Bank" }}:Checking   0 {{ .Values.currency | default "VND" }}
+  Equity:Opening-Balances

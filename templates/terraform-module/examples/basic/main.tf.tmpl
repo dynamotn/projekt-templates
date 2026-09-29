@@ -1,0 +1,9 @@
+module "{{ .Name | replace "-" "_" }}" {
+  source = "../.."
+
+  name = "example"
+
+  tags = {
+    Environment = "dev"
+  }
+}

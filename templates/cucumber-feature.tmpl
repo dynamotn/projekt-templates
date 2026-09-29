@@ -1,0 +1,20 @@
+Feature: {{ .Values.feature | default .Name }}
+  {{ .Values.summary | default "Who wants this, and what it buys them." }}
+
+  Background:
+    Given {{ .Values.background | default "the system is ready" }}
+
+  Scenario: {{ .Values.scenario | default "The happy path" }}
+    Given {{ .Values.given | default "a value that is valid" }}
+    When {{ .Values.when | default "the value is submitted" }}
+    Then {{ .Values.then | default "the result is accepted" }}
+
+  Scenario Outline: {{ .Values.scenario | default "The happy path" }}, for every shape of input
+    Given a value "<value>"
+    When the value is submitted
+    Then the result is "<result>"
+
+    Examples:
+      | value | result   |
+      | ok    | accepted |
+      |       | refused  |

@@ -1,0 +1,14 @@
+description: Ansible role in ~/Working/personal/infra, under dynamo-infra
+source:
+  template: ansible-role
+register:
+  workspace: ~/Working/personal/infra
+  prefix: infra
+  tags: [ansible, infra]
+  remote:
+    host: gl
+    group: dynamo-infra
+    branch: main
+after:
+  - git init -q -b main
+  - git add -A && git commit -q -m "Start {{ .Name }}"

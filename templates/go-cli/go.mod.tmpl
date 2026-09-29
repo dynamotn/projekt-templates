@@ -1,0 +1,3 @@
+module {{ .Values.module | default (printf "gitlab.com/%s/%s" .User .Name) }}
+
+go {{ .Values.goVersion | default "1.26" }}

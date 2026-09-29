@@ -1,0 +1,3 @@
+# Rendered before it is read, so the values decide what the project gets.
+{{ if ne (.Values.ci | default "gitlab") "github" }}.github/{{ end }}
+{{ if ne (.Values.ci | default "gitlab") "gitlab" }}.gitlab-ci.yml{{ end }}

@@ -1,0 +1,6 @@
+vars:
+  - name: summary
+    prompt: What the module is for, in one line
+  - name: class
+    prompt: Name of the options class
+    default: "{{ .Name }}"

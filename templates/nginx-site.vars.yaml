@@ -1,0 +1,13 @@
+vars:
+  - name: domain
+    prompt: Domain the site answers on
+    default: '{{ .Name }}'
+    required: true
+  - name: summary
+    prompt: What the site serves, in one line
+  - name: upstream
+    prompt: Upstream address
+    default: 127.0.0.1:8080
+  - name: maxBody
+    prompt: client_max_body_size
+    default: 16m

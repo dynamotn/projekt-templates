@@ -1,0 +1,19 @@
+---@brief {{ .Values.summary | default "What this module is for, in one line" }}
+
+---@class {{ .Values.class | default (.Name | title) }}Opts
+---@field enabled? boolean
+
+local M = {}
+
+---@type {{ .Values.class | default (.Name | title) }}Opts
+M.defaults = {
+  enabled = true,
+}
+
+---@param opts? {{ .Values.class | default (.Name | title) }}Opts
+function M.setup(opts)
+  M.options = vim.tbl_deep_extend('force', {}, M.defaults, opts or {})
+  if not M.options.enabled then return end
+end
+
+return M

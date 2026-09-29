@@ -1,0 +1,8 @@
+vars:
+  - name: summary
+    prompt: What does it do, in one line
+  - name: zigVersion
+    prompt: Minimum Zig version
+    default: "0.15.1"
+after:
+  - '{{ if lookPath "zig" }}zig fmt src build.zig{{ end }}'

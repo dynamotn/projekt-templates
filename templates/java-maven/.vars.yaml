@@ -1,0 +1,26 @@
+# A path segment cannot hold a separator, so the package is asked for one
+# segment at a time and the dotted form is built from them. Four levels —
+# io.github.you.project — is what the layout assumes.
+vars:
+  - name: domain
+    prompt: Package, first segment
+    default: io
+    required: true
+  - name: org
+    prompt: Package, second segment
+    default: github
+    required: true
+  - name: owner
+    prompt: Package, third segment
+    default: "{{ .User }}"
+    required: true
+  - name: className
+    prompt: Main class name
+    default: App
+  - name: javaVersion
+    prompt: Java release
+    default: "25"
+  - name: summary
+    prompt: What does it do, in one line
+after:
+  - '{{ if lookPath "mvn" }}mvn -q -DskipTests compile{{ end }}'

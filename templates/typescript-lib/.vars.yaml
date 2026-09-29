@@ -1,0 +1,12 @@
+vars:
+  - name: summary
+    prompt: What does it do, in one line
+  - name: scope
+    prompt: npm scope, without the @ (blank for none)
+  - name: runtime
+    type: choice
+    choices: [node, bun, browser]
+    default: node
+after:
+  - '{{ if lookPath "pnpm" }}pnpm install{{ end }}'
+  - '{{ if lookPath "git" }}git init -q{{ end }}'

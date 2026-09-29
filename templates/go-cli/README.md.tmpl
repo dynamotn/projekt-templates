@@ -1,0 +1,22 @@
+# {{ .Name }}
+
+{{ .Values.summary | default "One line on what this is and who it is for." }}
+
+## Install
+
+```bash
+go install {{ .Values.module | default (printf "gitlab.com/%s/%s" .User .Name) }}/cmd/{{ .Name }}@latest
+```
+
+## Usage
+
+```bash
+{{ .Name }} --version
+```
+
+## Development
+
+```bash
+make test
+make lint
+```

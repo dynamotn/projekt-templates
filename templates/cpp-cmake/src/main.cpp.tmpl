@@ -1,0 +1,12 @@
+#include <iostream>
+
+#include "{{ .Name }}/{{ .Name }}.hpp"
+
+int main(int argc, char** argv) {
+  if (argc < 2) {
+    std::cerr << "Usage: {{ .Name }} <value>\n";
+    return 64;
+  }
+  std::cout << {{ .Name | replace "-" "_" }}::run(argv[1]) << '\n';
+  return 0;
+}

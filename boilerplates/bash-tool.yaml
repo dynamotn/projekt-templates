@@ -1,0 +1,24 @@
+description: Bash tool with dybatpho, bats and prek, in ~/Working/personal/tools
+source:
+  template: bash-tool
+vars:
+  - name: area
+    prompt: Library area, the namespace of its functions
+    default: '{{ .Name | replace "-" "_" }}'
+    required: true
+  - name: summary
+    prompt: What does it do, in one line
+  - name: dybatpho
+    prompt: Vendor dybatpho as a submodule
+    type: bool
+    default: "yes"
+register:
+  workspace: ~/Working/personal/tools
+  prefix: tool
+  tags: [bash, tool, personal]
+  remote:
+    host: gl
+    group: dynamo-tools
+    branch: main
+after:
+  - git add -A && git commit -q -m "Start {{ .Name }}"

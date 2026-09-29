@@ -1,0 +1,18 @@
+# A Helm chart is Go templates all the way down, so this template moves its
+# own actions out of the way instead of escaping every `{{` the chart needs.
+delims: ["<%", "%>"]
+vars:
+  - name: summary
+    prompt: What does the chart deploy, in one line
+  - name: image
+    prompt: Container image
+    default: "nginx"
+  - name: tag
+    prompt: Image tag
+    default: "latest"
+  - name: port
+    prompt: Container port
+    type: int
+    default: "8080"
+after:
+  - '{{ if lookPath "helm" }}helm lint .{{ end }}'

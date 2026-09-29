@@ -1,0 +1,12 @@
+[package]
+name = "{{ .Name }}"
+version = "0.1.0"
+edition = "{{ .Values.edition | default "2024" }}"
+description = "{{ .Values.summary | default "What it does, in one line" }}"
+license = "{{ .Values.license | default "MIT" }}"
+authors = ["{{ .Values.author | default .User }}"]
+
+[dependencies]
+
+[lints.clippy]
+pedantic = "warn"

@@ -1,0 +1,13 @@
+import { describe, expect, it } from "vitest";
+
+import { EmptyValueError, run } from "../src/index.js";
+
+describe("run", () => {
+  it("returns its argument", () => {
+    expect(run("value")).toBe("value");
+  });
+
+  it("refuses an empty value", () => {
+    expect(() => run("")).toThrow(EmptyValueError);
+  });
+});

@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ .Values.namespace | default (.User | title) }}\{{ .Name | title | replace "-" "" }};
+
+use InvalidArgumentException;
+
+/**
+ * {{ .Values.summary | default "What this does, in one line" }}
+ */
+final class {{ .Values.className | default "Runner" }}
+{
+    /**
+     * Returns $value as this library sees it.
+     *
+     * @throws InvalidArgumentException When $value is empty.
+     */
+    public function run(string $value): string
+    {
+        if ($value === '') {
+            throw new InvalidArgumentException('value must not be empty');
+        }
+
+        return $value;
+    }
+}

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>{{ .Values.dotnetVersion | default "net10.0" }}</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>{{ .Name | replace "-" "" }}</RootNamespace>
+    <Description>{{ .Values.summary | default "What it does, in one line" }}</Description>
+  </PropertyGroup>
+
+</Project>

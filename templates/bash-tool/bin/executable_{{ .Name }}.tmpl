@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# @file {{ .Name }}
+# @brief {{ .Values.summary | default "What this tool does, in one line" }}
+set -euo pipefail
+
+PROJECT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." &> /dev/null && pwd)
+readonly PROJECT_DIR
+{{ if .Values.dybatpho }}
+
+# shellcheck source=/dev/null
+source "${PROJECT_DIR}/lib/dybatpho/index.sh"
+{{- end }}
+# shellcheck source=/dev/null
+source "${PROJECT_DIR}/lib/{{ .Values.area | default .Name }}.sh"
+
+function main {
+  if [[ $# -eq 0 ]]; then
+    printf 'Usage: %s <value>\n' "{{ .Name }}" >&2
+    exit 64
+  fi
+  {{ .Values.area | default .Name }}::run "${1}"
+}
+
+main "$@"

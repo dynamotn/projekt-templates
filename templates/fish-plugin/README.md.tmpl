@@ -1,0 +1,15 @@
+# {{ .Name }}
+
+{{ .Values.summary | default "One line on what this fish plugin does." }}
+
+## Install
+
+```fish
+fisher install {{ .Values.repo | default (printf "gitlab.com/%s/%s" .User .Name) }}
+```
+
+## Usage
+
+```fish
+{{ .Values.function | default .Name }} --help
+```

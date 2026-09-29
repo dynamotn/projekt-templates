@@ -1,0 +1,18 @@
+vars:
+  - name: feature
+    prompt: Feature name
+    default: '{{ .Name }}'
+  - name: summary
+    prompt: Who wants this, and what it buys them
+  - name: background
+    prompt: What is true before every scenario
+    default: the system is ready
+  - name: scenario
+    prompt: Name of the first scenario
+    default: The happy path
+  - name: given
+    default: a value that is valid
+  - name: when
+    default: the value is submitted
+  - name: then
+    default: the result is accepted

@@ -1,0 +1,17 @@
+vars:
+  - name: number
+    prompt: Migration number
+    default: "0001"
+  - name: table
+    prompt: Table it touches
+    default: "{{ .Name }}"
+  - name: summary
+    prompt: What it changes, in one line
+  - name: dialect
+    type: choice
+    choices: [ansi, postgres, mysql, sqlite]
+    default: ansi
+  - name: up
+    prompt: Statement to apply (blank for a CREATE TABLE skeleton)
+  - name: down
+    prompt: Statement to undo it (blank for the matching DROP)

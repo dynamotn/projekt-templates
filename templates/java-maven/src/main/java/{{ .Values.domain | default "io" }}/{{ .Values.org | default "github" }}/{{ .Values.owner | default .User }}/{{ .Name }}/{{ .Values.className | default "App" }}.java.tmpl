@@ -1,0 +1,29 @@
+package {{ .Values.domain | default "io" }}.{{ .Values.org | default "github" }}.{{ .Values.owner | default .User }}.{{ .Name | replace "-" "" }};
+
+/** {{ .Values.summary | default "What this does, in one line" }} */
+public final class {{ .Values.className | default "App" }} {
+
+  private {{ .Values.className | default "App" }}() {}
+
+  /**
+   * Returns {@code value} as this program sees it.
+   *
+   * @param value the value to work on
+   * @return the value
+   * @throws IllegalArgumentException when {@code value} is blank
+   */
+  public static String run(String value) {
+    if (value == null || value.isBlank()) {
+      throw new IllegalArgumentException("value must not be empty");
+    }
+    return value;
+  }
+
+  public static void main(String[] args) {
+    if (args.length == 0) {
+      System.err.println("Usage: {{ .Name }} <value>");
+      System.exit(64);
+    }
+    System.out.println(run(args[0]));
+  }
+}
