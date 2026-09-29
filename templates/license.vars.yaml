@@ -1,0 +1,14 @@
+vars:
+  - name: license
+    type: choice
+    choices: [MIT, Apache-2.0, BSD-2-Clause, GPL-3.0, Unlicense, WTFPL, CC-BY-NC-SA-4.0]
+    default: MIT
+  - name: author
+    prompt: Copyright holder
+    default: "{{ .User }}"
+  - name: email
+    prompt: Contact email for the copyright holder, blank to omit
+    default: ""
+  - name: project
+    prompt: Project name, for the GPL notice
+    default: "{{ .Name }}"

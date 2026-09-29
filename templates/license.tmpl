@@ -1,0 +1,19 @@
+{{- $_ := .Values.author -}}
+{{- $_ = .Values.project -}}
+{{- $_ = .Values.email -}}
+{{- $id := .Values.license | default "MIT" | lower -}}
+{{- if eq $id "mit" -}}
+{{ includeTemplate "license/mit" . }}
+{{- else if eq $id "apache-2.0" -}}
+{{ includeTemplate "license/apache-2.0" . }}
+{{- else if eq $id "gpl-3.0" -}}
+{{ includeTemplate "license/gpl-3.0" . }}
+{{- else if eq $id "wtfpl" -}}
+{{ includeTemplate "license/wtfpl" . }}
+{{- else if eq $id "bsd-2-clause" -}}
+{{ includeTemplate "license/bsd-2-clause" . }}
+{{- else if eq $id "cc-by-nc-sa-4.0" -}}
+{{ includeTemplate "license/cc-by-nc-sa-4.0" . }}
+{{- else -}}
+{{ includeTemplate "license/unlicense" . }}
+{{- end }}
