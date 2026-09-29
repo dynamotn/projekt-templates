@@ -1,0 +1,9 @@
+{{ includeTemplate "gitignore/shared" . }}
+{{- with .Values.extra }}
+
+# Project specific #
+####################
+{{-   range . }}
+{{-  . }}
+{{-   end }}
+{{- end }}
