@@ -1,3 +1,4 @@
+name: LICENSE
 vars:
   - name: license
     type: choice
